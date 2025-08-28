@@ -1,0 +1,41 @@
+<header>
+    <mat-toolbar color="primary" class="top-toolbar">
+        <span class="logo">TC Trains</span>
+        
+        <!-- Filler pushes links to the right -->
+        <span class="spacer"></span>
+
+        <nav class="desktop-menu">
+            <!-- Navigation links -->
+            <button mat-button routerLink="/">Home</button>
+            <button mat-button routerLink="/">Tickets</button>
+            <button mat-button routerLink="/">Destinations</button>
+            <button mat-button routerLink="/">Offers</button>
+            <button mat-button routerLink="/">Help</button>
+
+            <!-- Dropdown menu -->
+            <button mat-button [matMenuTriggerFor]="menu">More</button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item routerLink="/">Contact</button>
+                <button mat-menu-item routerLink="/">FAQ</button>
+            </mat-menu>
+
+            <!-- Optional user/profile icon -->
+            <button mat-icon-button [matMenuTriggerFor]="userMenu">
+            <mat-icon>account_circle</mat-icon>
+            </button>
+            <mat-menu #userMenu="matMenu">
+                <button mat-menu-item>Profile</button>
+                <button mat-menu-item>Logout</button>
+            </mat-menu>
+        </nav>
+
+        <!-- Hamburger button for mobile -->
+        <button mat-icon-button (click)="toggleSidenav()" class="mobile-menu">
+            <mat-icon>menu</mat-icon>
+        </button>
+    </mat-toolbar>
+
+    
+
+</header>
