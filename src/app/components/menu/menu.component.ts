@@ -5,10 +5,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
-  imports: [MatButtonModule, MatMenuModule, MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule],
+  imports: [RouterLink, MatButtonModule, MatMenuModule, MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss'
 })

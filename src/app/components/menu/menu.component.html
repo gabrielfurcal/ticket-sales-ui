@@ -7,17 +7,17 @@
 
         <nav class="desktop-menu">
             <!-- Navigation links -->
-            <button mat-button routerLink="/">Home</button>
-            <button mat-button routerLink="/">Tickets</button>
-            <button mat-button routerLink="/">Destinations</button>
-            <button mat-button routerLink="/">Offers</button>
-            <button mat-button routerLink="/">Help</button>
+            <a mat-button routerLink="/">Home</a>
+            <a mat-button routerLink="/tickets">Tickets</a>
+            <a mat-button routerLink="/">Destinations</a>
+            <a mat-button routerLink="/">Offers</a>
+            <a mat-button routerLink="/">Help</a>
 
             <!-- Dropdown menu -->
             <button mat-button [matMenuTriggerFor]="menu">More</button>
             <mat-menu #menu="matMenu">
-                <button mat-menu-item routerLink="/">Contact</button>
-                <button mat-menu-item routerLink="/">FAQ</button>
+                <a mat-menu-item routerLink="/">Contact</a>
+                <a mat-menu-item routerLink="/">FAQ</a>
             </mat-menu>
 
             <!-- Optional user/profile icon -->
@@ -25,8 +25,8 @@
             <mat-icon>account_circle</mat-icon>
             </button>
             <mat-menu #userMenu="matMenu">
-                <button mat-menu-item>Profile</button>
-                <button mat-menu-item>Logout</button>
+                <a mat-menu-item>Profile</a>
+                <a mat-menu-item>Logout</a>
             </mat-menu>
         </nav>
 
@@ -35,7 +35,4 @@
             <mat-icon>menu</mat-icon>
         </button>
     </mat-toolbar>
-
-    
-
 </header>

@@ -1,0 +1,20 @@
+.mobile-sidenav {
+  background-color: var(--mat-sys-primary-container); /* cyan from theme */
+  color: var(--mat-sys-primary);           /* readable text */
+}
+
+.mobile-sidenav {
+  color: var(--mat-sys-primary); 
+}
+
+.content {
+    margin-top: 64px !important; /* offset for toolbar */
+    min-height: calc(100vh - 64px);
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 5px 10px;
+    background-color: var(--mat-sys-background);
+    box-shadow:
+      -5px 0 10px -5px rgba(0,0,0,0.1), /* left */
+       5px 0 10px -5px rgba(0,0,0,0.1);  /* right */
+}

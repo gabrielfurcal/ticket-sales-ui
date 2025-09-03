@@ -1,32 +1,14 @@
-import { Component, OnInit, signal } from '@angular/core';
-import { gql } from '@apollo/client/core';
-import { Apollo } from 'apollo-angular';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { MatTabsModule } from '@angular/material/tabs';
+import { RoundtripFormComponent } from '../../components/roundtrip-form/roundtrip-form.component';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [MatTabsModule, RoundtripFormComponent],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrl: './home.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HomeComponent implements OnInit {
-  constructor(private apollo: Apollo) { }
+export class HomeComponent {
 
-  passengers = signal<any[]>([]);
-
-  ngOnInit(): void {
-    const query = gql`
-      query {
-          passengers {
-              firstName,
-              lastName
-          }
-      }
-    `;
-
-    this.apollo.watchQuery({
-      query: query,
-    }).valueChanges.subscribe((data: any) => {
-      this.passengers.set(data?.data?.passengers);
-    });
-  }
 }

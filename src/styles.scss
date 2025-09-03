@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@use '@angular/material' as mat;
+@use './custom-theme.scss' as *;
 
 html, body { height: 100%; margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
@@ -7,15 +7,7 @@ html, body { height: 100%; margin: 0; font-family: Roboto, "Helvetica Neue", san
   height: 100vh;
 }
 
-.mobile-sidenav {
-  background-color: var(--mat-sys-color-primary-container); /* cyan from theme */
-  color: var(--mat-sys-color-on-primary-container);          /* readable text */
-}
-
-.mobile-sidenav .mat-list-item {
-  color: var(--mat-sys-color-on-primary-container);
-}
-
 .mobile-sidenav .mat-list-item:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
+
