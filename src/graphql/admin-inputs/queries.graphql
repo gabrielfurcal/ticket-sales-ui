@@ -1,0 +1,10 @@
+query GetStations {
+    stations {
+        id,
+        name,
+        city {
+            city,
+            province
+        }
+    }
+}

@@ -1,10 +1,10 @@
-<form [formGroup]="roundtripForm">
+<form [formGroup]="roundtripForm" (ngSubmit)="submit()">
     <div class="roundtrip-form">
         <mat-form-field class="origin-field">
             <mat-label>Origin</mat-label>
             <mat-select formControlName="origin">
                 @for (station of stations(); track station.id) {
-                    <mat-option value="{{ station.id}}">{{ station.name }} - {{ station.city.city }}, {{ station.city.province }}</mat-option>
+                    <mat-option value="{{ station.id }}">{{ station.name }} - {{ station.city.city }}, {{ station.city.province }}</mat-option>
                 }
             </mat-select>
         </mat-form-field>
@@ -13,7 +13,7 @@
             <mat-label>Destination</mat-label>
             <mat-select formControlName="destination">
                 @for (station of stations(); track station.id) {
-                    <mat-option value="{{ station.id}}">{{ station.name }} - {{ station.city.city }} {{ station.city.province }}</mat-option>
+                    <mat-option value="{{ station.id }}">{{ station.name }} - {{ station.city.city }} {{ station.city.province }}</mat-option>
                 }
             </mat-select>
         </mat-form-field>
