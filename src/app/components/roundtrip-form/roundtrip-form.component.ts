@@ -9,10 +9,11 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { GetStationsGQL } from '../../../graphql/admin-inputs/schema';
 import { Apollo } from 'apollo-angular';
 import { RoundtripFormValue } from './roundtrip-form.types';
+import { TicketCardComponent } from "../ticket-card/ticket-card.component";
 
 @Component({
   selector: 'app-roundtrip-form',
-  imports: [MatTabsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatDatepickerModule, MatButtonModule],
+  imports: [MatTabsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatDatepickerModule, MatButtonModule, TicketCardComponent],
   templateUrl: './roundtrip-form.component.html',
   styleUrl: './roundtrip-form.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
