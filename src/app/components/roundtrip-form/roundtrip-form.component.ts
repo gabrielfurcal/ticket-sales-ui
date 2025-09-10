@@ -1,15 +1,17 @@
 import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
-import { GetStationsGQL } from '../../../graphql/admin-inputs/schema';
 import { Apollo } from 'apollo-angular';
-import { RoundtripFormValue } from './roundtrip-form.types';
+
+import { GetStationsGQL } from '../../../graphql/admin-inputs/schema';
+import { GetSchedulesGQL } from '../../../graphql/train-company/schema';
 import { TicketCardComponent } from "../ticket-card/ticket-card.component";
+import { RoundtripFormValue } from './roundtrip-form.types';
 
 @Component({
   selector: 'app-roundtrip-form',
@@ -19,9 +21,13 @@ import { TicketCardComponent } from "../ticket-card/ticket-card.component";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RoundtripFormComponent implements OnInit {
-  constructor(private apollo: Apollo, private fb: FormBuilder, private getStationsGQL: GetStationsGQL) { }
+  constructor(private apollo: Apollo, private fb: FormBuilder, private getStationsGQL: GetStationsGQL, private getSchedulesGQL: GetSchedulesGQL) { }
 
   stations = signal<any[]>([]);
+  schedules = signal<any[]>([]);
+  fromInfo = signal<any>({});
+  toInfo = signal<any>({});
+
   roundtripForm!: FormGroup<RoundtripFormValue>;
 
   ngOnInit(): void {
@@ -40,6 +46,11 @@ export class RoundtripFormComponent implements OnInit {
 
   submit() {
     const formData: Partial<RoundtripFormValue> = this.roundtripForm.value!;
-    console.log(formData);
+    this.fromInfo.set(this.stations().find(station => station.id === formData.origin));
+    this.toInfo.set(this.stations().find(station => station.id === formData.destination));
+
+    this.getSchedulesGQL.watch().valueChanges.subscribe((data: any) => {
+      this.schedules.set(data?.data?.schedules);
+    });
   }
 }

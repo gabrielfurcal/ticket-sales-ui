@@ -106,6 +106,7 @@ export type BaseQueries = {
   __typename?: 'BaseQueries';
   passengerById?: Maybe<Passenger>;
   passengers: Array<Passenger>;
+  schedules: Array<Schedule>;
   ticketById?: Maybe<Ticket>;
   ticketCategories: Array<TicketCategory>;
   ticketCategoryById?: Maybe<TicketCategory>;
@@ -193,6 +194,7 @@ export type Route = {
   endStation?: Maybe<Station>;
   id?: Maybe<Scalars['Int']['output']>;
   startStation?: Maybe<Station>;
+  ticketType: Array<TicketType>;
 };
 
 export type Schedule = {
@@ -207,7 +209,7 @@ export type Schedule = {
 
 export type Station = {
   __typename?: 'Station';
-  cityId?: Maybe<Scalars['Int']['output']>;
+  city?: Maybe<City>;
   countryCode?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
   imageUrl?: Maybe<Scalars['String']['output']>;
@@ -335,6 +337,11 @@ export type GetPassengersQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetPassengersQuery = { __typename?: 'BaseQueries', passengers: Array<{ __typename?: 'Passenger', firstName: string, lastName: string, email: string }> };
 
+export type GetSchedulesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetSchedulesQuery = { __typename?: 'BaseQueries', schedules: Array<{ __typename?: 'Schedule', id?: number | null, departureTime?: string | null, arrivalTime?: string | null, route?: { __typename?: 'Route', id?: number | null, distance?: number | null, startStation?: { __typename?: 'Station', name?: string | null, city?: { __typename?: 'City', city?: string | null, province?: string | null } | null } | null, endStation?: { __typename?: 'Station', name?: string | null, city?: { __typename?: 'City', city?: string | null, province?: string | null } | null } | null, ticketType: Array<{ __typename?: 'TicketType', salePrice: any, discountPercentage?: any | null, ticketCategory: { __typename?: 'TicketCategory', name: string } }> } | null }> };
+
 export const GetPassengersDocument = gql`
     query GetPassengers {
   passengers {
@@ -350,6 +357,51 @@ export const GetPassengersDocument = gql`
   })
   export class GetPassengersGQL extends Apollo.Query<GetPassengersQuery, GetPassengersQueryVariables> {
     override document = GetPassengersDocument;
+    override client = 'firstClient';
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const GetSchedulesDocument = gql`
+    query GetSchedules {
+  schedules {
+    id
+    departureTime
+    arrivalTime
+    route {
+      id
+      distance
+      startStation {
+        name
+        city {
+          city
+          province
+        }
+      }
+      endStation {
+        name
+        city {
+          city
+          province
+        }
+      }
+      ticketType {
+        salePrice
+        discountPercentage
+        ticketCategory {
+          name
+        }
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetSchedulesGQL extends Apollo.Query<GetSchedulesQuery, GetSchedulesQueryVariables> {
+    override document = GetSchedulesDocument;
     override client = 'firstClient';
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

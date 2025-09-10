@@ -5,3 +5,36 @@ query GetPassengers {
         email
     }
 }
+
+query GetSchedules {
+    schedules {
+        id
+        departureTime
+        arrivalTime
+        route {
+            id
+            distance
+            startStation {
+                name
+                city {
+                    city
+                    province
+                }
+            }
+            endStation {
+                name
+                city {
+                    city
+                    province
+                }
+            }
+            ticketType {
+                salePrice
+                discountPercentage
+                ticketCategory {
+                    name
+                }
+            }
+        }
+    }
+}

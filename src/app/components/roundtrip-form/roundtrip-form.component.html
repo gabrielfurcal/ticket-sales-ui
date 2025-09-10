@@ -36,10 +36,13 @@
         <button matButton="filled" type="submit" [disabled]="roundtripForm.invalid" class="submit-button-roundtrip">Find tickets</button>
     </div>
 </form>
-<span>From Union Station Toronto - Toronto, Ontario to Pacific Central Station - Vancouver, British Columbia</span>
-<br/><br/>
-<app-ticket-card [scheduleId]="1"></app-ticket-card>
-<br/>
-<app-ticket-card [scheduleId]="1"></app-ticket-card>
-<br/>
-<app-ticket-card [scheduleId]="1"></app-ticket-card>
+
+@if(schedules().length > 0) {
+    <span>From {{ fromInfo().name }} - {{ fromInfo().city.city }}, {{ fromInfo().city.province }} to {{ toInfo().name }} - {{ toInfo().city.city }}, {{ toInfo().city.province }}</span>
+    <br/><br/>
+
+    @for(schedule of schedules(); track schedule.id) {
+        <app-ticket-card [schedule]="schedule"></app-ticket-card>
+        <br/>
+    }
+}
