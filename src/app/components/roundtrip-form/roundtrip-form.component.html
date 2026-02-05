@@ -1,0 +1,48 @@
+<form [formGroup]="roundtripForm" (ngSubmit)="submit()">
+    <div class="roundtrip-form">
+        <mat-form-field class="origin-field">
+            <mat-label>Origin</mat-label>
+            <mat-select formControlName="origin">
+                @for (station of stations(); track station.id) {
+                    <mat-option value="{{ station.id }}">{{ station.name }} - {{ station.city.city }}, {{ station.city.province }}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="destination-field">
+            <mat-label>Destination</mat-label>
+            <mat-select formControlName="destination">
+                @for (station of stations(); track station.id) {
+                    <mat-option value="{{ station.id }}">{{ station.name }} - {{ station.city.city }} {{ station.city.province }}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Departure - Return</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+                <input matStartDate placeholder="Departure" formControlName="departureDate">
+                <input matEndDate placeholder="Return" formControlName="returnDate">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Number of Passengers</mat-label>
+            <input matInput formControlName="passengers" type="number" min="1" />
+        </mat-form-field>
+
+        <button matButton="filled" type="submit" [disabled]="roundtripForm.invalid" class="submit-button-roundtrip">Find tickets</button>
+    </div>
+</form>
+
+@if(schedules().length > 0) {
+    <span>From {{ fromInfo().name }} - {{ fromInfo().city.city }}, {{ fromInfo().city.province }} to {{ toInfo().name }} - {{ toInfo().city.city }}, {{ toInfo().city.province }}</span>
+    <br/><br/>
+
+    @for(schedule of schedules(); track schedule.id) {
+        <app-ticket-card [schedule]="schedule"></app-ticket-card>
+        <br/>
+    }
+}

@@ -1,0 +1,28 @@
+.roundtrip-form {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    margin: 16px auto 0;
+    width: 99%;
+}
+
+.origin-field {
+    width: 300px;
+}
+
+.destination-field {
+    width: 300px;
+}
+
+@media (max-width: 880px) {
+  .roundtrip-form {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 1000px) {
+  .roundtrip-form, .destination-field, .origin-field {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+}

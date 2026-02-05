@@ -1,0 +1,17 @@
+<mat-card appearance="outlined">
+    <mat-card-header>
+        <mat-card-title>
+            {{ schedule.route.startStation.city.city | uppercase }} <mat-icon class="from-to-arrow">arrow_forward</mat-icon> {{ schedule.route.endStation.city.city | uppercase }}
+        </mat-card-title>
+        <mat-card-subtitle>{{ schedule.departureTime | timeDiff: schedule.arrivalTime }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-actions align="end">
+        @for(ticketType of schedule.route.ticketType; track $index) {
+            @if(ticketType.ticketCategory.name === "First Class") {
+                <button matButton="filled" class="ticket-prices-btn">{{ ticketType.ticketCategory.name }} - {{ ticketType.salePrice | currency }}</button>
+            } @else {
+                <button matButton="tonal" class="ticket-prices-btn">{{ ticketType.ticketCategory.name }} - {{ ticketType.salePrice | currency }}</button>
+            }
+        }
+    </mat-card-actions>
+</mat-card>

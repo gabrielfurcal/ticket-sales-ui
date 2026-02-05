@@ -1,0 +1,33 @@
+.top-toolbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: var(--mat-sys-primary-container); /* cyan from theme */
+  color: var(--mat-sys-primary);          /* readable text */
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.desktop-menu {
+  display: flex;
+}
+
+.desktop-menu > *, .desktop-menu > mat-mdc-menu-item-text, .mobile-menu {
+  color: var(--mat-sys-primary);
+}
+
+.mobile-menu {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .desktop-menu {
+    display: none;
+  }
+  .mobile-menu {
+    display: inline-flex;
+  }
+}
