@@ -164,6 +164,7 @@ export type Query = {
   routes: Array<Route>;
   scheduleById?: Maybe<Schedule>;
   schedules: Array<Schedule>;
+  schedulesFiltered?: Maybe<Array<Schedule>>;
   stationById?: Maybe<Station>;
   stations: Array<Station>;
   status: Array<Status>;
@@ -190,6 +191,15 @@ export type QueryRouteByIdArgs = {
 
 export type QueryScheduleByIdArgs = {
   id?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QuerySchedulesFilteredArgs = {
+  endDate?: InputMaybe<Scalars['String']['input']>;
+  endStationId?: InputMaybe<Scalars['Int']['input']>;
+  passengers?: InputMaybe<Scalars['Int']['input']>;
+  startDate?: InputMaybe<Scalars['String']['input']>;
+  startStationId?: InputMaybe<Scalars['Int']['input']>;
 };
 
 

@@ -6,8 +6,8 @@ query GetPassengers {
     }
 }
 
-query GetSchedules {
-    schedules {
+query GetSchedules($startStationId: Int!, $endStationId: Int!, $startDate: String!, $endDate: String!, $passengers: Int!) {
+    schedules(startStationId: $startStationId, endStationId: $endStationId, startDate: $startDate, endDate: $endDate, passengers: $passengers) {
         id
         departureTime
         arrivalTime

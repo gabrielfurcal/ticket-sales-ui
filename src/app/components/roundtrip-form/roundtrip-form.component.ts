@@ -49,7 +49,17 @@ export class RoundtripFormComponent implements OnInit {
     this.fromInfo.set(this.stations().find(station => station.id === formData.origin));
     this.toInfo.set(this.stations().find(station => station.id === formData.destination));
 
-    this.getSchedulesGQL.watch().valueChanges.subscribe((data: any) => {
+    // Format dates to YYYY-MM-DD 00:00:00 if no time is specified
+    const startDate = formData.departureDate ? `${new Date(formData.departureDate).toISOString().split('T')[0]} 00:00:00` : '';
+    const endDate = formData.returnDate ? `${new Date(formData.returnDate).toISOString().split('T')[0]} 00:00:00` : '';
+
+    this.getSchedulesGQL.watch({
+      startStationId: +formData.origin,
+      endStationId: +formData.destination,
+      startDate: startDate,
+      endDate: endDate,
+      passengers: formData.passengers
+    }).valueChanges.subscribe((data: any) => {
       this.schedules.set(data?.data?.schedules);
     });
   }

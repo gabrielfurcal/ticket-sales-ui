@@ -125,6 +125,15 @@ export type BaseQueriesPassengerByIdArgs = {
 };
 
 
+export type BaseQueriesSchedulesArgs = {
+  endDate: Scalars['String']['input'];
+  endStationId: Scalars['Int']['input'];
+  passengers: Scalars['Int']['input'];
+  startDate: Scalars['String']['input'];
+  startStationId: Scalars['Int']['input'];
+};
+
+
 export type BaseQueriesTicketByIdArgs = {
   id: Scalars['UUID']['input'];
 };
@@ -337,7 +346,13 @@ export type GetPassengersQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetPassengersQuery = { __typename?: 'BaseQueries', passengers: Array<{ __typename?: 'Passenger', firstName: string, lastName: string, email: string }> };
 
-export type GetSchedulesQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetSchedulesQueryVariables = Exact<{
+  startStationId: Scalars['Int']['input'];
+  endStationId: Scalars['Int']['input'];
+  startDate: Scalars['String']['input'];
+  endDate: Scalars['String']['input'];
+  passengers: Scalars['Int']['input'];
+}>;
 
 
 export type GetSchedulesQuery = { __typename?: 'BaseQueries', schedules: Array<{ __typename?: 'Schedule', id?: number | null, departureTime?: string | null, arrivalTime?: string | null, route?: { __typename?: 'Route', id?: number | null, distance?: number | null, startStation?: { __typename?: 'Station', name?: string | null, city?: { __typename?: 'City', city?: string | null, province?: string | null } | null } | null, endStation?: { __typename?: 'Station', name?: string | null, city?: { __typename?: 'City', city?: string | null, province?: string | null } | null } | null, ticketType: Array<{ __typename?: 'TicketType', salePrice: any, discountPercentage?: any | null, ticketCategory: { __typename?: 'TicketCategory', name: string } }> } | null }> };
@@ -363,8 +378,14 @@ export const GetPassengersDocument = gql`
     }
   }
 export const GetSchedulesDocument = gql`
-    query GetSchedules {
-  schedules {
+    query GetSchedules($startStationId: Int!, $endStationId: Int!, $startDate: String!, $endDate: String!, $passengers: Int!) {
+  schedules(
+    startStationId: $startStationId
+    endStationId: $endStationId
+    startDate: $startDate
+    endDate: $endDate
+    passengers: $passengers
+  ) {
     id
     departureTime
     arrivalTime
